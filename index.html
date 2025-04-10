@@ -12,9 +12,11 @@
       box-sizing: border-box;
       font-family: 'Segoe UI', sans-serif;
     }
+
     body {
       background-color: #f0f2f5;
     }
+
     header {
       width: 100%;
       padding: 15px 40px;
@@ -27,17 +29,20 @@
       top: 0;
       z-index: 10;
     }
+
     .logo {
       font-size: 22px;
       font-weight: bold;
       color: #2c3e50;
     }
+
     nav a {
       margin-left: 20px;
       color: #333;
       text-decoration: none;
       font-size: 14px;
     }
+
     nav a i {
       margin-right: 6px;
     }
@@ -169,6 +174,7 @@
       .container {
         flex-direction: column;
       }
+
       .image-section {
         order: -1;
       }
@@ -176,7 +182,6 @@
   </style>
 </head>
 <body>
-
   <header>
     <div class="logo">CSC Vle</div>
     <nav>
@@ -195,16 +200,16 @@
       </div>
 
       <!-- Login Form -->
-      <form id="loginForm">
+      <form id="loginForm" onsubmit="handleLogin(event)">
         <h2>Welcome Back</h2>
         <p>Please login to your account</p>
         <div class="form-group">
           <label for="email">Email ID *</label>
-          <input type="text" id="email" placeholder="Enter your email" required />
+          <input type="text" id="email" name="email" placeholder="Enter your email" required />
         </div>
         <div class="form-group">
           <label for="password">Password *</label>
-          <input type="password" id="password" placeholder="Enter your password" required />
+          <input type="password" id="password" name="password" placeholder="Enter your password" required />
         </div>
         <div class="options">
           <label><input type="checkbox" /> Remember me</label>
@@ -218,23 +223,23 @@
       </form>
 
       <!-- Signup Form -->
-      <form id="signupForm" style="display: none;" onsubmit="return validateSignupForm()">
+      <form id="signupForm" style="display: none;" onsubmit="handleSignup(event)">
         <h2>Create Account</h2>
         <div class="form-group">
           <label for="name">Full Name *</label>
-          <input type="text" id="name" placeholder="Your full name" required />
+          <input type="text" id="name" name="name" placeholder="Your full name" required />
         </div>
         <div class="form-group">
           <label for="signupEmail">Email ID *</label>
-          <input type="email" id="signupEmail" placeholder="Enter your email" required />
+          <input type="email" id="signupEmail" name="signupEmail" placeholder="Enter your email" required />
         </div>
         <div class="form-group">
           <label for="signupPassword">Password *</label>
-          <input type="password" id="signupPassword" placeholder="Create a password" required />
+          <input type="password" id="signupPassword" name="signupPassword" placeholder="Create a password" required />
         </div>
         <div class="form-group">
           <label for="confirmPassword">Confirm Password *</label>
-          <input type="password" id="confirmPassword" placeholder="Re-enter password" required />
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter password" required />
         </div>
         <button class="btn" type="submit">Register</button>
       </form>
@@ -254,7 +259,9 @@
       document.getElementById('signupBtn').classList.toggle('active', form === 'signup');
     }
 
-    function validateSignupForm() {
+    function handleSignup(event) {
+      event.preventDefault(); // Prevent form from submitting
+
       const password = document.getElementById("signupPassword").value;
       const confirm = document.getElementById("confirmPassword").value;
 
@@ -263,9 +270,16 @@
         return false;
       }
 
+      alert("Registration successful!");
+      // Submit or process the form
       return true;
     }
-  </script>
 
+    function handleLogin(event) {
+      event.preventDefault();
+      alert("Login attempted!");
+      // Add authentication logic here
+    }
+  </script>
 </body>
 </html>
